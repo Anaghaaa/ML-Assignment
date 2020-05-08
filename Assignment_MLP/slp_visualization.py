@@ -25,15 +25,15 @@ from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as pt
 data_df=p.read_csv('https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data', header=None)
 y=data_df.iloc[0:100,4].values
-y=np.where(y=='Iris-setosa',-1,1)
+y=np.where(y=='Iris-versicolor',-1,1)
 z=data_df.iloc[0:100,[0,2]].values
 pp=slp()
 pp.fitting(z,y)
 
 def plot_decision_regions(z,y,cl):
-    resolution=0.02
+    resolution=0.1
     mar=('s','x','o','^','v')
-    col=('blue','green','lightgreen','gray','cyan')
+    col=('blue','green','green','black','cyan')
     cmap=ListedColormap(col[:len(np.unique(y))])
     
     mini_1=z[:,0].min()-1
@@ -52,7 +52,7 @@ def plot_decision_regions(z,y,cl):
     for b,d in enumerate(np.unique(y)):
         pt.scatter(x=z[y==d,0],y=z[y==d,1] ,alpha=0.8, c=cmap(b),marker=mar[b],label=d)
 plot_decision_regions(z,y,cl=pp)
-pt.xlabel('Sepal length')
 pt.ylabel('Petal length')
-pt.legend(loc='upper left')
+pt.xlabel('Sepal length')
+pt.legend(loc='upper right')
 pt.show()
